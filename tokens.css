@@ -1,5 +1,5 @@
 /*!
- * psicothica-kit 1.0.0 — tokens.css
+ * psicothica-kit 1.0.1 — tokens.css
  * Variáveis --psi-* (cor, gradiente, vidro, raio, espaço, tipografia) + @font-face locais.
  * Nenhuma requisição externa: as fontes ficam em ./fonts/ (WOFF2, latin + latin-ext, licença OFL
  * em fonts/licenses/). Copie tokens.css e a pasta fonts/ JUNTOS para o app.
@@ -19,7 +19,7 @@
  *  Em fundo claro (--psi-paper) use --psi-ink (#0f142a): 18,2:1. Nunca texto claro sobre papel.
  *
  * Movimento: nada aqui anima. Brilhos animados só existem em psi-components.css, dentro de
- * @media (prefers-reduced-motion: no-preference).
+ * @media (prefers-reduced-motion: no-preference). O neon estático (--psi-neon*) pode ficar sempre.
  */
 
 :root {
@@ -65,7 +65,16 @@
   --psi-glass-border: rgba(225, 238, 252, 0.18);
   --psi-glass-blur: 16px;
   --psi-glass-shadow: 0 8px 32px rgba(3, 6, 20, 0.45);
-  /* brilho neon (estático; a animação opcional fica em psi-components.css) */
+  /* Neon DUPLO: magenta/orquídea de um lado, ciano do outro, mais um halo suave dos dois.
+     --psi-neon é o padrão; -sm (sutil) e -lg (destaque) variam a intensidade.
+     Versões -text servem para text-shadow (títulos); as demais, para box-shadow. Estáticos. */
+  --psi-neon-sm: -2px 0 8px rgba(206, 87, 223, 0.5), 2px 0 8px rgba(2, 187, 255, 0.45), 0 0 16px rgba(150, 110, 255, 0.22);
+  --psi-neon: -3px 0 14px rgba(206, 87, 223, 0.6), 3px 0 14px rgba(2, 187, 255, 0.55), 0 0 30px rgba(150, 110, 255, 0.32);
+  --psi-neon-lg: -5px 0 24px rgba(206, 87, 223, 0.7), 5px 0 24px rgba(2, 187, 255, 0.65), 0 0 52px rgba(150, 110, 255, 0.42);
+  --psi-neon-text-sm: -1px 0 5px rgba(206, 87, 223, 0.6), 1px 0 5px rgba(2, 187, 255, 0.55), 0 0 12px rgba(150, 110, 255, 0.3);
+  --psi-neon-text: -1px 0 8px rgba(206, 87, 223, 0.7), 1px 0 8px rgba(2, 187, 255, 0.65), 0 0 22px rgba(150, 110, 255, 0.4);
+  --psi-neon-text-lg: -2px 0 12px rgba(206, 87, 223, 0.8), 2px 0 12px rgba(2, 187, 255, 0.75), 0 0 36px rgba(150, 110, 255, 0.5);
+  /* brilhos de uma cor só (uso pontual) */
   --psi-glow-magenta: 0 0 10px rgba(206, 87, 223, 0.55), 0 0 28px rgba(177, 4, 220, 0.35);
   --psi-glow-cyan: 0 0 10px rgba(2, 187, 255, 0.5), 0 0 28px rgba(130, 229, 255, 0.28);
   --psi-focus-ring: 0 0 0 3px rgba(130, 229, 255, 0.85);
@@ -86,10 +95,10 @@
   --psi-container: 960px;
 
   /* ── Tipografia ─────────────────────────────── */
-  --psi-font-display: "Bebas Neue", "Arial Narrow", Impact, sans-serif;   /* impacto: títulos */
+  --psi-font-display: "Tektur", "Arial Black", Impact, sans-serif;           /* impacto: títulos (peso 900) */
   --psi-font-accent: "Shrikhand", Georgia, serif;                          /* acento: selos, destaques curtos */
   --psi-font-hand: "Amatic SC", "Comic Sans MS", cursive;                  /* manuscrito */
-  --psi-font-signature: "Great Vibes", "Brush Script MT", cursive;         /* assinatura */
+  --psi-font-signature: "Allison", "Brush Script MT", cursive;              /* assinatura */
   --psi-font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace; /* sistema/dados */
   --psi-font-text: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* texto corrido */
 
@@ -105,19 +114,19 @@
 
 /* ── Fontes locais (WOFF2, subset latin + latin-ext) ─────────────────────── */
 @font-face {
-  font-family: "Bebas Neue";
+  font-family: "Tektur";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 900;
   font-display: swap;
-  src: url("./fonts/bebas-neue-latin-ext-400.woff2") format("woff2");
+  src: url("./fonts/tektur-latin-ext-900.woff2") format("woff2");
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 @font-face {
-  font-family: "Bebas Neue";
+  font-family: "Tektur";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 900;
   font-display: swap;
-  src: url("./fonts/bebas-neue-latin-400.woff2") format("woff2");
+  src: url("./fonts/tektur-latin-900.woff2") format("woff2");
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 @font-face {
@@ -169,19 +178,19 @@
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 @font-face {
-  font-family: "Great Vibes";
+  font-family: "Allison";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("./fonts/great-vibes-latin-ext-400.woff2") format("woff2");
+  src: url("./fonts/allison-latin-ext-400.woff2") format("woff2");
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 @font-face {
-  font-family: "Great Vibes";
+  font-family: "Allison";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("./fonts/great-vibes-latin-400.woff2") format("woff2");
+  src: url("./fonts/allison-latin-400.woff2") format("woff2");
   unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
 }
 @font-face {

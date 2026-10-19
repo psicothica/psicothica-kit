@@ -41,9 +41,16 @@ ${ftr("", "App de exemplo")}
 write(
   "demo/index.html",
   read("scripts/demo.template.html")
-    .replace("<!--HEAD-->", head("psicothica-kit 1.0.0 · demo"))
+    .replace("<!--HEAD-->", head("psicothica-kit 1.0.1 · demo"))
     .replace("<!--HEADER-->", hdr("Balança da Decisão"))
     .replace("<!--FOOTER-SEM-->", ftr("", "App sem aviso médico"))
-    .replace("<!--FOOTER-COM-->", ftr(" data-psi-aviso-medico", "App com aviso médico")),
+    .replace("<!--FOOTER-COM-->", ftr(" data-psi-aviso-medico", "App com aviso médico"))
+    .replace(
+      "<!--FOOTER-COLAB-->",
+      ftr(
+        ` data-psi-colaboradores='[{"nome":"Nome Exemplo","profissao":"nutricionista","registro":"CRN 0/0000 — exemplo"},{"nome":"Outra Pessoa Exemplo","profissao":"médica","registro":"CRM 0000 — exemplo"}]'`,
+        "App com colaboradores (exemplo)",
+      ),
+    ),
 );
 console.log("demo gerado");

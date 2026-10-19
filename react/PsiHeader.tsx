@@ -1,4 +1,4 @@
-/*! psicothica-kit 1.0.0 · PsiHeader — só depende de React. CSS: tokens.css + psi-components.css. */
+/*! psicothica-kit 1.0.1 · PsiHeader — só depende de React. CSS: tokens.css + psi-components.css. */
 import { useEffect, useState } from "react";
 
 export type PsiHeaderProps = {
@@ -26,7 +26,8 @@ function detectEmbedded(): boolean {
 
 /**
  * Cabeçalho Psicothica: logo + nome do app + selo. Dentro de um iframe (AyAClin) fica compacto: uma
- * linha, logo pequena e selo. A detecção é feita no estado inicial (síncrona), então não há "pisca".
+ * linha, recorte do círculo da logo e selo. Fora, mostra a logo completa e o nome do app. A detecção
+ * é feita no estado inicial (síncrona), então não há "pisca".
  * Pensado para apps só de cliente (Vite SPA). Com SSR, o servidor renderiza o modo completo e o
  * cliente pode divergir: nesse caso passe `embedded` explicitamente.
  */
@@ -40,16 +41,18 @@ export function PsiHeader({ appName, assetsBase = "./psi-kit/", embedded, classN
   }, [compact]);
 
   const base = assetsBase.endsWith("/") ? assetsBase : assetsBase + "/";
+  // Completa fora do iframe (44px); recorte do círculo no modo embutido (28px).
+  const [name1x, name2x, size] = compact ? ["logo-32", "logo-64", 28] : ["logo-128", "logo-256", 44];
   return (
     <header className={`psi-header${compact ? " psi-header--compact" : ""} ${className}`.trim()} role="banner">
       <div className="psi-header__inner">
-        <picture className="psi-header__logo">
-          <source type="image/webp" srcSet={`${base}logo/logo-64.webp 1x, ${base}logo/logo-128.webp 2x`} />
+        <picture className={`psi-header__logo psi-header__logo--${compact ? "crop" : "full"}`}>
+          <source type="image/webp" srcSet={`${base}logo/${name1x}.webp 1x, ${base}logo/${name2x}.webp 2x`} />
           <img
-            src={`${base}logo/logo-64.png`}
-            srcSet={`${base}logo/logo-64.png 1x, ${base}logo/logo-128.png 2x`}
-            width={44}
-            height={44}
+            src={`${base}logo/${name1x}.png`}
+            srcSet={`${base}logo/${name1x}.png 1x, ${base}logo/${name2x}.png 2x`}
+            width={size}
+            height={size}
             alt=""
             decoding="async"
           />

@@ -1,8 +1,9 @@
 /*!
- * psicothica-kit 1.0.0 — psi-components.css
+ * psicothica-kit 1.0.1 — psi-components.css
  * Cabeçalho, rodapé, vidro, cartão, botão, selo e aviso de armazenamento.
  * Tudo escopado com o prefixo .psi- (não vaza para o CSS do app). Requer tokens.css.
- * Sem requisição externa. Brilho animado só com prefers-reduced-motion: no-preference.
+ * Sem requisição externa. Neon duplo (magenta + ciano, tokens --psi-neon*). Brilho animado só com
+ * prefers-reduced-motion: no-preference; o neon estático permanece.
  */
 
 /* ── Tema (opcional): aplique a classe no <body> para o fundo e o texto padrão da marca ── */
@@ -36,7 +37,8 @@
   .psi-glass { background: rgba(26, 33, 62, 0.92); }
 }
 .psi-glass--strong { background: var(--psi-glass-bg-strong); }
-.psi-glass--glow { box-shadow: var(--psi-glass-shadow), var(--psi-glow-magenta); }
+.psi-glass--glow, .psi-card:focus-within { box-shadow: var(--psi-glass-shadow), var(--psi-neon); }
+.psi-card:focus-within { border-color: rgba(130, 229, 255, 0.45); }
 
 .psi-card {
   padding: var(--psi-space-5);
@@ -45,11 +47,14 @@
 .psi-card__title {
   margin: 0 0 var(--psi-space-2);
   font-family: var(--psi-font-display);
-  font-weight: 400;
-  font-size: var(--psi-text-xl);
-  letter-spacing: 0.03em;
-  line-height: 1.1;
+  font-weight: 900;
+  font-size: 1.375rem;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
 }
+/* Título de destaque com neon duplo (use com moderação: 1 por tela) */
+.psi-title-neon { color: var(--psi-text); text-shadow: var(--psi-neon-text); }
+.psi-title-neon--lg { text-shadow: var(--psi-neon-text-lg); }
 .psi-card__text { margin: 0; color: var(--psi-text-muted); font-size: var(--psi-text-sm); }
 
 /* ── Botões ────────────────────────────────────────────────────────────── */
@@ -64,8 +69,8 @@
 .psi-btn:active { transform: translateY(1px); }
 .psi-btn:focus-visible, .psi-seal:focus-visible, .psi-footer a:focus-visible { outline: none; box-shadow: var(--psi-focus-ring); }
 /* texto escuro sobre o gradiente rosa→azul: contraste mínimo 4,67:1 (AA) */
-.psi-btn--primary { background: var(--psi-grad-4); color: var(--psi-ink); box-shadow: var(--psi-glow-magenta); }
-.psi-btn--primary:hover { box-shadow: var(--psi-glow-magenta), 0 0 0 2px rgba(225, 238, 252, 0.35); }
+.psi-btn--primary { background: var(--psi-grad-4); color: var(--psi-ink); box-shadow: var(--psi-neon-sm); }
+.psi-btn--primary:hover { box-shadow: var(--psi-neon); }
 .psi-btn--ghost {
   background: var(--psi-glass-bg); color: var(--psi-text); border-color: var(--psi-glass-border);
 }
@@ -81,7 +86,7 @@
   background: rgba(177, 4, 220, 0.18);
   color: var(--psi-lavender);
   font-family: var(--psi-font-accent); font-size: 1rem; line-height: 1.2; letter-spacing: 0.02em;
-  box-shadow: var(--psi-glow-magenta);
+  box-shadow: var(--psi-neon-sm);
   text-decoration: none; white-space: nowrap;
 }
 
@@ -103,10 +108,13 @@
 }
 .psi-header__logo { display: block; flex: none; line-height: 0; }
 .psi-header__logo img { display: block; width: 44px; height: 44px; object-fit: contain; }
+/* A logo completa aparece fora do iframe; o recorte do círculo, no modo embutido. */
+.psi-header__logo--crop { display: none; }
 .psi-header__app {
   flex: 1 1 auto; min-width: 0; margin: 0;
-  font-family: var(--psi-font-display); font-weight: 400;
-  font-size: clamp(1.5rem, 5vw, 2.25rem); letter-spacing: 0.04em; line-height: 1;
+  font-family: var(--psi-font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.05rem, 4.2vw, 1.6rem); letter-spacing: 0.04em; line-height: 1.1;
+  color: var(--psi-text); text-shadow: var(--psi-neon-text-sm);
   overflow-wrap: anywhere;
 }
 .psi-header .psi-seal { margin-left: auto; }
@@ -117,7 +125,9 @@
 html.psi-embedded .psi-header__inner, .psi-header--compact .psi-header__inner {
   padding: var(--psi-space-1) var(--psi-space-3); gap: var(--psi-space-2); flex-wrap: nowrap;
 }
-html.psi-embedded .psi-header__logo img, .psi-header--compact .psi-header__logo img { width: 24px; height: 24px; }
+html.psi-embedded .psi-header__logo--full, .psi-header--compact .psi-header__logo--full { display: none; }
+html.psi-embedded .psi-header__logo--crop, .psi-header--compact .psi-header__logo--crop { display: block; }
+html.psi-embedded .psi-header__logo img, .psi-header--compact .psi-header__logo img { width: 28px; height: 28px; }
 html.psi-embedded .psi-header__app, .psi-header--compact .psi-header__app {
   position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden;
   clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
@@ -146,8 +156,10 @@ html.psi-embedded .psi-header .psi-seal, .psi-header--compact .psi-seal {
   padding: var(--psi-space-5) var(--psi-space-4) var(--psi-space-6);
 }
 .psi-footer p { margin: 0 0 var(--psi-space-3); }
-.psi-footer__app { font-family: var(--psi-font-display); font-size: 1.25rem; letter-spacing: 0.05em; color: var(--psi-text); }
+.psi-footer__app { font-family: var(--psi-font-display); font-weight: 900; text-transform: uppercase; font-size: 1.05rem; letter-spacing: 0.05em; color: var(--psi-text); }
 .psi-footer__assinatura strong { color: var(--psi-text); font-weight: 700; }
+.psi-footer__assinatura span { display: block; }
+.psi-footer__colab[hidden] { display: none; }
 .psi-footer__medico {
   padding: var(--psi-space-3) var(--psi-space-4);
   border: 1px solid var(--psi-glass-border); border-left: 3px solid var(--psi-cyan);
@@ -168,8 +180,8 @@ html.psi-embedded .psi-header .psi-seal, .psi-header--compact .psi-seal {
 /* ── Brilho animado: só se a pessoa NÃO pediu redução de movimento ─────── */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes psi-pulse {
-    0%, 100% { box-shadow: 0 0 8px rgba(206, 87, 223, 0.45), 0 0 20px rgba(177, 4, 220, 0.25); }
-    50% { box-shadow: 0 0 14px rgba(206, 87, 223, 0.75), 0 0 36px rgba(177, 4, 220, 0.5); }
+    0%, 100% { box-shadow: var(--psi-neon-sm); }
+    50% { box-shadow: var(--psi-neon); }
   }
   .psi-seal { animation: psi-pulse 4.5s ease-in-out infinite; }
   html.psi-embedded .psi-header .psi-seal, .psi-header--compact .psi-seal { animation: none; }

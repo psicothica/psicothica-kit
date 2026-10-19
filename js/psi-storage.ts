@@ -1,4 +1,4 @@
-/*! psicothica-kit 1.0.0 · psi-storage.ts — mesma lógica de psi-storage.js, como módulo ES tipado.
+/*! psicothica-kit 1.0.1 · psi-storage.ts — mesma lógica de psi-storage.js, como módulo ES tipado.
  *
  * Armazenamento local com prefixo por app: psi.<slug>.v1.<chave>.
  * Todos os apps dividem a origem psicothica.github.io; o prefixo faz cada app ler, gravar, exportar
@@ -8,7 +8,7 @@
  *   const store = create({ slug: "navegador-emocional", appName: "Navegador Emocional", version: "1.0.0" });
  */
 
-export const KIT_VERSION = "1.0.0";
+export const KIT_VERSION = "1.0.1";
 const SCHEMA = 1;
 const MIGRATED_FLAG = "__migrated";
 const DEFAULT_WARNING = "Seus registros não serão salvos neste navegador.";

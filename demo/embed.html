@@ -19,9 +19,14 @@
 </script>
 <header class="psi-header" role="banner">
   <div class="psi-header__inner">
-    <picture class="psi-header__logo">
-      <source type="image/webp" srcset="../logo/logo-64.webp 1x, ../logo/logo-128.webp 2x">
-      <img src="../logo/logo-64.png" srcset="../logo/logo-64.png 1x, ../logo/logo-128.png 2x" width="44" height="44" alt="" decoding="async">
+    <!-- logo completa (fora do iframe) e recorte do círculo (modo embutido): o CSS mostra uma só -->
+    <picture class="psi-header__logo psi-header__logo--full">
+      <source type="image/webp" srcset="../logo/logo-128.webp 1x, ../logo/logo-256.webp 2x">
+      <img src="../logo/logo-128.png" srcset="../logo/logo-128.png 1x, ../logo/logo-256.png 2x" width="44" height="44" alt="" decoding="async" loading="lazy">
+    </picture>
+    <picture class="psi-header__logo psi-header__logo--crop">
+      <source type="image/webp" srcset="../logo/logo-32.webp 1x, ../logo/logo-64.webp 2x">
+      <img src="../logo/logo-32.png" srcset="../logo/logo-32.png 1x, ../logo/logo-64.png 2x" width="28" height="28" alt="" decoding="async" loading="lazy">
     </picture>
     <p class="psi-header__app">App de exemplo</p>
     <span class="psi-seal">Psicothica</span>
@@ -32,10 +37,14 @@
 <footer class="psi-footer" role="contentinfo" data-psi-app="App de exemplo" data-psi-versao="1.0.0" data-psi-revisao="10/2026">
   <div class="psi-footer__inner">
     <p class="psi-footer__app" data-psi-slot="app"></p>
-    <p class="psi-footer__assinatura"><strong>Psicothica</strong> · por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)<br>Disponível no Programa Ramificar da AyA Clínica Integrada.</p>
+    <p class="psi-footer__assinatura">
+      <span><strong>Psicothica</strong> · idealizado e revisado por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)</span>
+      <span class="psi-footer__colab" data-psi-slot="colab" hidden></span>
+      <span>Disponível no Programa Ramificar da AyA Clínica Integrada.</span>
+    </p>
     <p>Material informativo e de apoio. Não substitui avaliação, diagnóstico ou acompanhamento profissional, e não oferece promessa de cura ou de resultado.</p>
     <p class="psi-footer__medico" data-psi-slot="aviso-medico" hidden>As informações sobre diagnóstico e tratamento médico têm caráter apenas informativo e se baseiam em literatura científica publicada. Decisões sobre medicação ou tratamento devem ser tomadas com seu(sua) médico(a).</p>
-    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pela profissional responsável.</p>
+    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pelos profissionais responsáveis acima.</p>
     <p>Seus dados ficam só neste aparelho. Nada do que você escreve é enviado à AyA nem a terceiros. Se você exportar um arquivo, ele levará o que você escreveu: guarde-o com cuidado.</p>
     <p class="psi-footer__crise">Em sofrimento intenso ou risco? <a href="tel:188" target="_blank" rel="noopener noreferrer">CVV 188</a> (gratuito, 24h) · <a href="tel:192" target="_blank" rel="noopener noreferrer">SAMU 192</a> · ou a emergência mais próxima.</p>
     <p class="psi-footer__versao">Versão <span data-psi-slot="versao">—</span> · revisado em <span data-psi-slot="revisao">—</span></p>
@@ -51,6 +60,16 @@
     put("revisao", f.getAttribute("data-psi-revisao"));
     var med = f.querySelector('[data-psi-slot="aviso-medico"]');
     if (med && f.hasAttribute("data-psi-aviso-medico")) med.hidden = false;
+    var colab = f.querySelector('[data-psi-slot="colab"]');
+    var raw = f.getAttribute("data-psi-colaboradores");
+    if (colab && raw) {
+      try {
+        var itens = JSON.parse(raw).filter(function (c) { return c && c.nome && c.profissao; }).map(function (c) {
+          return c.nome + ", " + c.profissao + (c.registro ? " (" + c.registro + ")" : "");
+        });
+        if (itens.length) { colab.textContent = "Com a colaboração de " + itens.join("; ") + "."; colab.hidden = false; }
+      } catch (e) { /* JSON inválido: a linha simplesmente não aparece */ }
+    }
   })();
 </script>
 

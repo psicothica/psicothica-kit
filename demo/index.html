@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>psicothica-kit 1.0.0 · demo</title>
+<title>psicothica-kit 1.0.1 · demo</title>
 <link rel="icon" href="../logo/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="../logo/apple-touch-icon.png">
 <link rel="stylesheet" href="../tokens.css">
@@ -12,10 +12,10 @@
   /* Estilos só da página de demonstração (prefixo .demo-). O kit em si está em tokens.css e psi-components.css. */
   .demo-wrap { max-width: var(--psi-container); margin: 0 auto; padding: var(--psi-space-5) var(--psi-space-4) 0; }
   .demo-wrap section { margin-bottom: var(--psi-space-7); }
-  .demo-h2 { font-family: var(--psi-font-display); font-weight: 400; font-size: var(--psi-text-2xl); letter-spacing: 0.04em; line-height: 1; margin: 0 0 var(--psi-space-2); }
+  .demo-h2 { font-family: var(--psi-font-display); font-weight: 900; font-size: clamp(1.5rem, 4.5vw, 2.1rem); letter-spacing: 0.02em; line-height: 1.1; margin: 0 0 var(--psi-space-2); }
   .demo-lead { color: var(--psi-text-muted); margin: 0 0 var(--psi-space-4); max-width: 62ch; }
-  .demo-hero { font-family: var(--psi-font-display); font-size: var(--psi-text-3xl); line-height: 0.95; letter-spacing: 0.03em; margin: var(--psi-space-6) 0 var(--psi-space-3); }
-  .demo-hero em { font-style: normal; background: var(--psi-grad-4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .demo-hero { font-family: var(--psi-font-display); font-weight: 900; font-size: clamp(1.9rem, 6.2vw, 3.4rem); line-height: 1.05; letter-spacing: 0.01em; margin: var(--psi-space-6) 0 var(--psi-space-3); }
+  .demo-hero em { font-style: normal; color: var(--psi-lavender); }
   .demo-grid { display: grid; gap: var(--psi-space-4); grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
   .demo-grid--wide { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   .demo-sw { border-radius: var(--psi-radius-md); overflow: hidden; border: 1px solid var(--psi-glass-border); }
@@ -37,7 +37,13 @@
   .demo-out.erro { color: #ffb4b4; }
   .demo-tag { display: inline-block; font-family: var(--psi-font-mono); font-size: 0.75rem; padding: 2px 8px; border-radius: var(--psi-radius-pill); border: 1px solid var(--psi-glass-border); color: var(--psi-text-muted); }
   .demo-hand { font-family: var(--psi-font-hand); font-size: 2rem; line-height: 1; color: var(--psi-lavender); }
-  .demo-sign { font-family: var(--psi-font-signature); font-size: 2.6rem; line-height: 1.1; color: var(--psi-sky); }
+  .demo-sign { font-family: var(--psi-font-signature); font-size: 3.4rem; line-height: 1.1; color: var(--psi-sky); }
+  .demo-neon { padding: var(--psi-space-5); border-radius: var(--psi-radius-md); background: var(--psi-glass-bg); border: 1px solid var(--psi-glass-border); text-align: center; }
+  .demo-neon code { display: block; margin-top: var(--psi-space-3); font-family: var(--psi-font-mono); font-size: 0.75rem; color: var(--psi-text-muted); }
+  .demo-logos { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--psi-space-5); }
+  .demo-logos figure { margin: 0; text-align: center; }
+  .demo-logos figcaption { margin-top: var(--psi-space-2); font-family: var(--psi-font-mono); font-size: 0.75rem; color: var(--psi-text-muted); }
+  .demo-exemplo { max-width: var(--psi-container); margin: var(--psi-space-5) auto 0; padding: 0 var(--psi-space-4); }
 </style>
 </head>
 <body class="psi-theme">
@@ -49,9 +55,14 @@
 </script>
 <header class="psi-header" role="banner">
   <div class="psi-header__inner">
-    <picture class="psi-header__logo">
-      <source type="image/webp" srcset="../logo/logo-64.webp 1x, ../logo/logo-128.webp 2x">
-      <img src="../logo/logo-64.png" srcset="../logo/logo-64.png 1x, ../logo/logo-128.png 2x" width="44" height="44" alt="" decoding="async">
+    <!-- logo completa (fora do iframe) e recorte do círculo (modo embutido): o CSS mostra uma só -->
+    <picture class="psi-header__logo psi-header__logo--full">
+      <source type="image/webp" srcset="../logo/logo-128.webp 1x, ../logo/logo-256.webp 2x">
+      <img src="../logo/logo-128.png" srcset="../logo/logo-128.png 1x, ../logo/logo-256.png 2x" width="44" height="44" alt="" decoding="async" loading="lazy">
+    </picture>
+    <picture class="psi-header__logo psi-header__logo--crop">
+      <source type="image/webp" srcset="../logo/logo-32.webp 1x, ../logo/logo-64.webp 2x">
+      <img src="../logo/logo-32.png" srcset="../logo/logo-32.png 1x, ../logo/logo-64.png 2x" width="28" height="28" alt="" decoding="async" loading="lazy">
     </picture>
     <p class="psi-header__app">Balança da Decisão</p>
     <span class="psi-seal">Psicothica</span>
@@ -59,7 +70,7 @@
 </header>
 
 <main class="demo-wrap">
-  <h1 class="demo-hero">psicothica-kit <em>1.0.0</em></h1>
+  <h1 class="demo-hero psi-title-neon psi-title-neon--lg">psicothica-kit <em>1.0.1</em></h1>
   <p class="demo-lead">Kit visual dos apps Psicothica: tokens, fontes locais, cabeçalho, rodapé e armazenamento por app. Esta página usa os mesmos blocos que os apps copiam. Nenhuma requisição a domínio externo.</p>
 
   <section aria-labelledby="s-cab">
@@ -99,14 +110,37 @@
 
   <section aria-labelledby="s-tip">
     <h2 class="demo-h2" id="s-tip">Tipografia</h2>
-    <p class="demo-lead">Seis fontes OFL, servidas de fonts/ (WOFF2, latin + latin-ext). Acentuação: ação, coração, órfã, ÀÉÎÕÜ.</p>
+    <p class="demo-lead">Seis fontes OFL (Tektur 900, Shrikhand, Amatic SC, Allison, JetBrains Mono, Plus Jakarta Sans), servidas de fonts/ (WOFF2, latin + latin-ext). Acentuação: ação, coração, órfã, ÀÉÎÕÜ.</p>
     <div class="demo-grid demo-grid--wide">
-      <div class="psi-glass demo-fonte"><small>Bebas Neue · display de impacto</small><div style="font-family:var(--psi-font-display);font-size:2.4rem;line-height:1;letter-spacing:.04em">Decidir com calma</div></div>
+      <div class="psi-glass demo-fonte"><small>Tektur 900 · display de impacto</small><div style="font-family:var(--psi-font-display);font-weight:900;font-size:1.9rem;line-height:1.1">Decidir com calma</div></div>
       <div class="psi-glass demo-fonte"><small>Shrikhand · acento</small><div style="font-family:var(--psi-font-accent);font-size:1.7rem;color:var(--psi-lavender)">Psicothica</div></div>
       <div class="psi-glass demo-fonte"><small>Amatic SC · manuscrito</small><div class="demo-hand">um passo de cada vez</div></div>
-      <div class="psi-glass demo-fonte"><small>Great Vibes · assinatura</small><div class="demo-sign">Alanne Farias</div></div>
+      <div class="psi-glass demo-fonte"><small>Allison · assinatura</small><div class="demo-sign">Alanne Farias</div></div>
       <div class="psi-glass demo-fonte"><small>JetBrains Mono · sistema/dados</small><div style="font-family:var(--psi-font-mono)">psi.balanca-da-decisao.v1.decisoes</div></div>
       <div class="psi-glass demo-fonte"><small>Plus Jakarta Sans · texto corrido</small><div>Texto corrido para leitura confortável, com boa legibilidade em telas pequenas.</div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-neon">
+    <h2 class="demo-h2" id="s-neon">Neon duplo</h2>
+    <p class="demo-lead">Magenta/orquídea de um lado, ciano do outro, mais um halo suave dos dois. Três intensidades, para caixas (<code>box-shadow</code>) e para texto (<code>text-shadow</code>). Estático: com movimento reduzido nada pulsa, o brilho fica.</p>
+    <div class="demo-grid demo-grid--wide">
+      <div class="demo-neon" style="box-shadow:var(--psi-neon-sm)"><strong class="psi-title-neon" style="text-shadow:var(--psi-neon-text-sm)">Sutil</strong><code>--psi-neon-sm · --psi-neon-text-sm</code></div>
+      <div class="demo-neon" style="box-shadow:var(--psi-neon)"><strong class="psi-title-neon" style="text-shadow:var(--psi-neon-text)">Padrão</strong><code>--psi-neon · --psi-neon-text</code></div>
+      <div class="demo-neon" style="box-shadow:var(--psi-neon-lg)"><strong class="psi-title-neon" style="text-shadow:var(--psi-neon-text-lg)">Destaque</strong><code>--psi-neon-lg · --psi-neon-text-lg</code></div>
+    </div>
+    <div class="demo-row" style="margin-top:var(--psi-space-4)"><span class="psi-seal">Psicothica</span><span class="demo-tag">selo, botão principal e cartão em foco usam o neon duplo</span></div>
+  </section>
+
+  <section aria-labelledby="s-logo">
+    <h2 class="demo-h2" id="s-logo">Logo</h2>
+    <p class="demo-lead">Duas formas: a <strong>completa</strong> (512, 256, 128 px) e o <strong>recorte do círculo</strong> com o cérebro (64, 32 px, favicon e apple-touch-icon), que continua legível pequeno. O cabeçalho completo usa a grande; o embutido, o recorte.</p>
+    <div class="demo-logos">
+      <figure><img src="../logo/logo-256.webp" width="200" height="200" alt="Logo Psicothica completa: cérebro low-poly dentro de uma bolha de vidro, com esferas"><figcaption>completa · 256</figcaption></figure>
+      <figure><img src="../logo/logo-128.webp" width="96" height="96" alt="Logo completa em 128 pixels"><figcaption>completa · 128</figcaption></figure>
+      <figure><img src="../logo/logo-64.webp" width="64" height="64" alt="Recorte do círculo da logo em 64 pixels"><figcaption>recorte · 64</figcaption></figure>
+      <figure><img src="../logo/logo-32.webp" width="32" height="32" alt="Recorte do círculo da logo em 32 pixels"><figcaption>recorte · 32</figcaption></figure>
+      <figure><img src="../logo/apple-touch-icon.png" width="90" height="90" alt="apple-touch-icon: recorte sobre fundo escuro" style="border-radius:20px"><figcaption>apple-touch · 180</figcaption></figure>
     </div>
   </section>
 
@@ -115,7 +149,7 @@
     <div class="demo-grid demo-grid--wide" style="margin-bottom:var(--psi-space-4)">
       <article class="psi-glass psi-card"><h3 class="psi-card__title">Cartão de vidro</h3><p class="psi-card__text">Camada translúcida com desfoque, borda clara e sombra suave.</p></article>
       <article class="psi-glass psi-glass--strong psi-card"><h3 class="psi-card__title">Vidro forte</h3><p class="psi-card__text">Mais opaco, para destacar uma área dentro de outra.</p></article>
-      <article class="psi-glass psi-glass--glow psi-card"><h3 class="psi-card__title">Com brilho neon</h3><p class="psi-card__text">Brilho magenta estático. Só o selo pulsa, e não pulsa com movimento reduzido.</p></article>
+      <article class="psi-glass psi-glass--glow psi-card"><h3 class="psi-card__title">Com brilho neon</h3><p class="psi-card__text">Neon duplo estático. Só o selo pulsa, e não pulsa com movimento reduzido.</p></article>
     </div>
     <div class="demo-row">
       <button class="psi-btn psi-btn--primary" type="button">Botão principal</button>
@@ -147,16 +181,20 @@
 
   <section aria-labelledby="s-rod">
     <h2 class="demo-h2" id="s-rod">Rodapé</h2>
-    <p class="demo-lead">Sem aviso médico (apps de saúde mental) e com aviso médico (apps com conteúdo de saúde física).</p>
+    <p class="demo-lead">Sem aviso médico (apps de saúde mental), com aviso médico (apps com conteúdo de saúde física) e com colaborador (o exemplo abaixo é fictício e está rotulado).</p>
   </section>
 </main>
 <footer class="psi-footer" role="contentinfo" data-psi-app="App sem aviso médico" data-psi-versao="1.0.0" data-psi-revisao="10/2026">
   <div class="psi-footer__inner">
     <p class="psi-footer__app" data-psi-slot="app"></p>
-    <p class="psi-footer__assinatura"><strong>Psicothica</strong> · por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)<br>Disponível no Programa Ramificar da AyA Clínica Integrada.</p>
+    <p class="psi-footer__assinatura">
+      <span><strong>Psicothica</strong> · idealizado e revisado por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)</span>
+      <span class="psi-footer__colab" data-psi-slot="colab" hidden></span>
+      <span>Disponível no Programa Ramificar da AyA Clínica Integrada.</span>
+    </p>
     <p>Material informativo e de apoio. Não substitui avaliação, diagnóstico ou acompanhamento profissional, e não oferece promessa de cura ou de resultado.</p>
     <p class="psi-footer__medico" data-psi-slot="aviso-medico" hidden>As informações sobre diagnóstico e tratamento médico têm caráter apenas informativo e se baseiam em literatura científica publicada. Decisões sobre medicação ou tratamento devem ser tomadas com seu(sua) médico(a).</p>
-    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pela profissional responsável.</p>
+    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pelos profissionais responsáveis acima.</p>
     <p>Seus dados ficam só neste aparelho. Nada do que você escreve é enviado à AyA nem a terceiros. Se você exportar um arquivo, ele levará o que você escreveu: guarde-o com cuidado.</p>
     <p class="psi-footer__crise">Em sofrimento intenso ou risco? <a href="tel:188" target="_blank" rel="noopener noreferrer">CVV 188</a> (gratuito, 24h) · <a href="tel:192" target="_blank" rel="noopener noreferrer">SAMU 192</a> · ou a emergência mais próxima.</p>
     <p class="psi-footer__versao">Versão <span data-psi-slot="versao">—</span> · revisado em <span data-psi-slot="revisao">—</span></p>
@@ -172,16 +210,30 @@
     put("revisao", f.getAttribute("data-psi-revisao"));
     var med = f.querySelector('[data-psi-slot="aviso-medico"]');
     if (med && f.hasAttribute("data-psi-aviso-medico")) med.hidden = false;
+    var colab = f.querySelector('[data-psi-slot="colab"]');
+    var raw = f.getAttribute("data-psi-colaboradores");
+    if (colab && raw) {
+      try {
+        var itens = JSON.parse(raw).filter(function (c) { return c && c.nome && c.profissao; }).map(function (c) {
+          return c.nome + ", " + c.profissao + (c.registro ? " (" + c.registro + ")" : "");
+        });
+        if (itens.length) { colab.textContent = "Com a colaboração de " + itens.join("; ") + "."; colab.hidden = false; }
+      } catch (e) { /* JSON inválido: a linha simplesmente não aparece */ }
+    }
   })();
 </script>
 
 <footer class="psi-footer" role="contentinfo" data-psi-app="App com aviso médico" data-psi-versao="1.0.0" data-psi-revisao="10/2026" data-psi-aviso-medico>
   <div class="psi-footer__inner">
     <p class="psi-footer__app" data-psi-slot="app"></p>
-    <p class="psi-footer__assinatura"><strong>Psicothica</strong> · por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)<br>Disponível no Programa Ramificar da AyA Clínica Integrada.</p>
+    <p class="psi-footer__assinatura">
+      <span><strong>Psicothica</strong> · idealizado e revisado por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)</span>
+      <span class="psi-footer__colab" data-psi-slot="colab" hidden></span>
+      <span>Disponível no Programa Ramificar da AyA Clínica Integrada.</span>
+    </p>
     <p>Material informativo e de apoio. Não substitui avaliação, diagnóstico ou acompanhamento profissional, e não oferece promessa de cura ou de resultado.</p>
     <p class="psi-footer__medico" data-psi-slot="aviso-medico" hidden>As informações sobre diagnóstico e tratamento médico têm caráter apenas informativo e se baseiam em literatura científica publicada. Decisões sobre medicação ou tratamento devem ser tomadas com seu(sua) médico(a).</p>
-    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pela profissional responsável.</p>
+    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pelos profissionais responsáveis acima.</p>
     <p>Seus dados ficam só neste aparelho. Nada do que você escreve é enviado à AyA nem a terceiros. Se você exportar um arquivo, ele levará o que você escreveu: guarde-o com cuidado.</p>
     <p class="psi-footer__crise">Em sofrimento intenso ou risco? <a href="tel:188" target="_blank" rel="noopener noreferrer">CVV 188</a> (gratuito, 24h) · <a href="tel:192" target="_blank" rel="noopener noreferrer">SAMU 192</a> · ou a emergência mais próxima.</p>
     <p class="psi-footer__versao">Versão <span data-psi-slot="versao">—</span> · revisado em <span data-psi-slot="revisao">—</span></p>
@@ -197,6 +249,56 @@
     put("revisao", f.getAttribute("data-psi-revisao"));
     var med = f.querySelector('[data-psi-slot="aviso-medico"]');
     if (med && f.hasAttribute("data-psi-aviso-medico")) med.hidden = false;
+    var colab = f.querySelector('[data-psi-slot="colab"]');
+    var raw = f.getAttribute("data-psi-colaboradores");
+    if (colab && raw) {
+      try {
+        var itens = JSON.parse(raw).filter(function (c) { return c && c.nome && c.profissao; }).map(function (c) {
+          return c.nome + ", " + c.profissao + (c.registro ? " (" + c.registro + ")" : "");
+        });
+        if (itens.length) { colab.textContent = "Com a colaboração de " + itens.join("; ") + "."; colab.hidden = false; }
+      } catch (e) { /* JSON inválido: a linha simplesmente não aparece */ }
+    }
+  })();
+</script>
+
+<div class="demo-exemplo"><span class="demo-tag">exemplo · rodapé com colaboradores (nomes fictícios, só para mostrar o formato)</span></div>
+<footer class="psi-footer" role="contentinfo" data-psi-app="App com colaboradores (exemplo)" data-psi-versao="1.0.0" data-psi-revisao="10/2026" data-psi-colaboradores='[{"nome":"Nome Exemplo","profissao":"nutricionista","registro":"CRN 0/0000 — exemplo"},{"nome":"Outra Pessoa Exemplo","profissao":"médica","registro":"CRM 0000 — exemplo"}]'>
+  <div class="psi-footer__inner">
+    <p class="psi-footer__app" data-psi-slot="app"></p>
+    <p class="psi-footer__assinatura">
+      <span><strong>Psicothica</strong> · idealizado e revisado por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)</span>
+      <span class="psi-footer__colab" data-psi-slot="colab" hidden></span>
+      <span>Disponível no Programa Ramificar da AyA Clínica Integrada.</span>
+    </p>
+    <p>Material informativo e de apoio. Não substitui avaliação, diagnóstico ou acompanhamento profissional, e não oferece promessa de cura ou de resultado.</p>
+    <p class="psi-footer__medico" data-psi-slot="aviso-medico" hidden>As informações sobre diagnóstico e tratamento médico têm caráter apenas informativo e se baseiam em literatura científica publicada. Decisões sobre medicação ou tratamento devem ser tomadas com seu(sua) médico(a).</p>
+    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pelos profissionais responsáveis acima.</p>
+    <p>Seus dados ficam só neste aparelho. Nada do que você escreve é enviado à AyA nem a terceiros. Se você exportar um arquivo, ele levará o que você escreveu: guarde-o com cuidado.</p>
+    <p class="psi-footer__crise">Em sofrimento intenso ou risco? <a href="tel:188" target="_blank" rel="noopener noreferrer">CVV 188</a> (gratuito, 24h) · <a href="tel:192" target="_blank" rel="noopener noreferrer">SAMU 192</a> · ou a emergência mais próxima.</p>
+    <p class="psi-footer__versao">Versão <span data-psi-slot="versao">—</span> · revisado em <span data-psi-slot="revisao">—</span></p>
+  </div>
+</footer>
+<script>
+  (function () {
+    var f = document.currentScript && document.currentScript.previousElementSibling;
+    if (!f || !f.classList.contains("psi-footer")) return;
+    function put(slot, text) { var el = f.querySelector('[data-psi-slot="' + slot + '"]'); if (el) el.textContent = text || ""; }
+    put("app", f.getAttribute("data-psi-app"));
+    put("versao", f.getAttribute("data-psi-versao"));
+    put("revisao", f.getAttribute("data-psi-revisao"));
+    var med = f.querySelector('[data-psi-slot="aviso-medico"]');
+    if (med && f.hasAttribute("data-psi-aviso-medico")) med.hidden = false;
+    var colab = f.querySelector('[data-psi-slot="colab"]');
+    var raw = f.getAttribute("data-psi-colaboradores");
+    if (colab && raw) {
+      try {
+        var itens = JSON.parse(raw).filter(function (c) { return c && c.nome && c.profissao; }).map(function (c) {
+          return c.nome + ", " + c.profissao + (c.registro ? " (" + c.registro + ")" : "");
+        });
+        if (itens.length) { colab.textContent = "Com a colaboração de " + itens.join("; ") + "."; colab.hidden = false; }
+      } catch (e) { /* JSON inválido: a linha simplesmente não aparece */ }
+    }
   })();
 </script>
 

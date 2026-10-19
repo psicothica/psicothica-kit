@@ -1,4 +1,4 @@
-/*! psicothica-kit 1.0.0 · psi-storage.js
+/*! psicothica-kit 1.0.1 · psi-storage.js
  *
  * Armazenamento local com prefixo por app: psi.<slug>.v1.<chave>.
  * Motivo: todos os apps dividem a origem psicothica.github.io (e o localStorage dela). Com prefixo por
@@ -20,7 +20,7 @@
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
 
-  var KIT_VERSION = "1.0.0";
+  var KIT_VERSION = "1.0.1";
   var SCHEMA = 1;
   var MIGRATED_FLAG = "__migrated";
   var DEFAULT_WARNING = "Seus registros não serão salvos neste navegador.";

@@ -1,4 +1,4 @@
-<!-- psicothica-kit 1.0.0 · rodapé (cole no fim do <body>, depois do conteúdo do app)
+<!-- psicothica-kit 1.0.1 · rodapé (cole no fim do <body>, depois do conteúdo do app)
 
      Preencha os atributos de <footer>:
        data-psi-app       nome do app
@@ -6,14 +6,21 @@
        data-psi-revisao   mês/ano da última revisão (ex.: 10/2026)
        data-psi-aviso-medico   (atributo sem valor) — presente = mostra o bloco "aviso médico";
                                apague o atributo nos apps sem conteúdo de saúde física.
+       data-psi-colaboradores  (opcional) lista JSON de quem colaborou; aceita mais de um. Ex.:
+                               data-psi-colaboradores='[{"nome":"Fulana","profissao":"nutricionista","registro":"CRN 0/0000"}]'
+                               "registro" é opcional. Sem o atributo, a linha de colaboração não aparece.
      Os textos fixos NÃO devem ser editados no app: mudaram? Mude no kit e publique nova versão. -->
 <footer class="psi-footer" role="contentinfo" data-psi-app="Nome do app" data-psi-versao="1.0.0" data-psi-revisao="10/2026">
   <div class="psi-footer__inner">
     <p class="psi-footer__app" data-psi-slot="app"></p>
-    <p class="psi-footer__assinatura"><strong>Psicothica</strong> · por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)<br>Disponível no Programa Ramificar da AyA Clínica Integrada.</p>
+    <p class="psi-footer__assinatura">
+      <span><strong>Psicothica</strong> · idealizado e revisado por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)</span>
+      <span class="psi-footer__colab" data-psi-slot="colab" hidden></span>
+      <span>Disponível no Programa Ramificar da AyA Clínica Integrada.</span>
+    </p>
     <p>Material informativo e de apoio. Não substitui avaliação, diagnóstico ou acompanhamento profissional, e não oferece promessa de cura ou de resultado.</p>
     <p class="psi-footer__medico" data-psi-slot="aviso-medico" hidden>As informações sobre diagnóstico e tratamento médico têm caráter apenas informativo e se baseiam em literatura científica publicada. Decisões sobre medicação ou tratamento devem ser tomadas com seu(sua) médico(a).</p>
-    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pela profissional responsável.</p>
+    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pelos profissionais responsáveis acima.</p>
     <p>Seus dados ficam só neste aparelho. Nada do que você escreve é enviado à AyA nem a terceiros. Se você exportar um arquivo, ele levará o que você escreveu: guarde-o com cuidado.</p>
     <p class="psi-footer__crise">Em sofrimento intenso ou risco? <a href="tel:188" target="_blank" rel="noopener noreferrer">CVV 188</a> (gratuito, 24h) · <a href="tel:192" target="_blank" rel="noopener noreferrer">SAMU 192</a> · ou a emergência mais próxima.</p>
     <p class="psi-footer__versao">Versão <span data-psi-slot="versao">—</span> · revisado em <span data-psi-slot="revisao">—</span></p>
@@ -29,5 +36,15 @@
     put("revisao", f.getAttribute("data-psi-revisao"));
     var med = f.querySelector('[data-psi-slot="aviso-medico"]');
     if (med && f.hasAttribute("data-psi-aviso-medico")) med.hidden = false;
+    var colab = f.querySelector('[data-psi-slot="colab"]');
+    var raw = f.getAttribute("data-psi-colaboradores");
+    if (colab && raw) {
+      try {
+        var itens = JSON.parse(raw).filter(function (c) { return c && c.nome && c.profissao; }).map(function (c) {
+          return c.nome + ", " + c.profissao + (c.registro ? " (" + c.registro + ")" : "");
+        });
+        if (itens.length) { colab.textContent = "Com a colaboração de " + itens.join("; ") + "."; colab.hidden = false; }
+      } catch (e) { /* JSON inválido: a linha simplesmente não aparece */ }
+    }
   })();
 </script>
