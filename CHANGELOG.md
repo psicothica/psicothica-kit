@@ -17,15 +17,20 @@ Ajustes visuais e de texto.
   entra **Allison** como assinatura. WOFF2 locais (latin + latin-ext) e licenças OFL. Os nomes das
   variáveis `--psi-font-display` e `--psi-font-signature` não mudaram. Tektur é mais larga que a
   Bebas: se algum app tinha títulos justos, revise a quebra de linha.
-- **Logo nova** (`logo/source/logo-psicothica.png`, 2000 px, fundo transparente): 512, 256 e 128 px
-  com a imagem inteira; 64 px, 32 px, `favicon.ico` e `apple-touch-icon.png` com o recorte do círculo
-  central. A logo antiga foi removida. O cabeçalho completo usa a logo grande (128/256 px); o modo
-  embutido usa o recorte (32/64 px). **Os apps precisam copiar a pasta `logo/` de novo**: os nomes
-  de `logo-512` a `logo-32`, `favicon.ico` e `apple-touch-icon.png` se mantêm, mas as imagens mudaram.
+- **Logo nova, três variações oficiais** (em `logo/source/`, 2000 px, fundo transparente, sem vetorizar):
+  `logo-psicothica.png` (completa: cérebro low-poly numa bolha de vidro, com esferas),
+  `logo-psicothica-circulo.png` (cérebro em círculo lilás) e `logo-psicothica-cerebro.png` (cérebro solo).
+  - **Completa:** cabeçalho completo; `logo-512`, `logo-256`, `logo-128` (PNG + WebP).
+  - **Círculo:** cabeçalho compacto (modo embutido); `logo-64`, `logo-32`, `favicon.ico` e
+    `apple-touch-icon.png` (180 px, sobre `#0f142a`). Só se tirou a margem transparente.
+  - **Cérebro solo:** `logo-cerebro-512` e `logo-cerebro-256`. Uso livre (carregamento, marca
+    d'água); **não** serve como ícone.
+  - A logo antiga foi removida. **Os apps precisam copiar a pasta `logo/` de novo**: os nomes de
+    `logo-512` a `logo-32`, `favicon.ico` e `apple-touch-icon.png` se mantêm, mas as imagens mudaram.
 - **Rodapé:** novo texto de autoria ("idealizado e revisado por…"), linha opcional de colaboração
   (`data-psi-colaboradores` no HTML, `collaborators` no React; aceita mais de um) e a linha de IA
   agora diz "revisados pelos profissionais responsáveis acima".
-- Demo: neon duplo, fontes novas, logo completa e recorte, rodapé com colaboradores (exemplo
+- Demo: neon duplo, fontes novas, logo completa, círculo e cérebro solo, rodapé com colaboradores (exemplo
   fictício rotulado).
 
 ## 1.0.0 — 2026-10-19

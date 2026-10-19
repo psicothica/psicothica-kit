@@ -13,7 +13,7 @@ Cada app **copia** os arquivos do kit para dentro de si (sem submodule, sem `npm
 | `tokens.css` | Variáveis `--psi-*` (cores, gradientes, vidro, brilho, raios, espaços, tipografia) e `@font-face` locais |
 | `psi-components.css` | Cabeçalho, rodapé, vidro, cartão, botão, selo e aviso de armazenamento (tudo com prefixo `.psi-`) |
 | `fonts/` | 6 fontes OFL em WOFF2 (latin + latin-ext) e `fonts/licenses/` |
-| `logo/` | Logomarca em PNG e WebP: completa (512, 256, 128) e recorte do círculo (64, 32), `favicon.ico`, `apple-touch-icon.png`; a imagem original fica em `logo/source/` |
+| `logo/` | Logomarca em PNG e WebP: completa (512, 256, 128), círculo (64, 32), cérebro solo (`logo-cerebro-512`, `-256`), `favicon.ico`, `apple-touch-icon.png`; as 3 imagens oficiais ficam em `logo/source/` |
 | `html/psi-header.html`, `html/psi-footer.html` | Blocos para apps de HTML único |
 | `react/PsiHeader.tsx`, `react/PsiFooter.tsx` | O mesmo cabeçalho e rodapé para apps Vite/React |
 | `js/psi-storage.js` e `js/psi-storage.ts` | Armazenamento local por app, exportar/importar JSON, migração de chaves antigas |
@@ -26,7 +26,10 @@ Cada app **copia** os arquivos do kit para dentro de si (sem submodule, sem `npm
 - Fontes: **Tektur 900** (display de impacto), **Shrikhand** (acento), **Amatic SC** (manuscrito), **Allison** (assinatura), **JetBrains Mono** (sistema/dados), **Plus Jakarta Sans** (texto corrido). Todas OFL.
 - **Extenda 60 GIGA e Brittany são fontes comerciais de uso exclusivo no Canva. Nunca entram neste kit nem em nenhum app.** Tektur e Allison são as escolhas definitivas fora do Canva.
 - Base escura `#0f142a`, destaque `#e1eefc`. Magenta-violeta `#b104dc` e índigo `#130169` **não** servem como cor de texto pequeno em fundo escuro (veja `docs/contraste.md`).
-- Logo: `logo/source/logo-psicothica.png` (cérebro low-poly numa bolha de vidro, fundo transparente), sem vetorizar. Imagem inteira nos tamanhos grandes; recorte do círculo central nos pequenos (64, 32, favicon, apple-touch-icon).
+- **Logo** (3 variações oficiais em `logo/source/`, sem vetorizar, fundo transparente):
+  - `logo-psicothica.png` — **completa** (cérebro low-poly numa bolha de vidro, com esferas): cabeçalho completo; `logo-512`, `logo-256`, `logo-128`.
+  - `logo-psicothica-circulo.png` — **círculo** lilás com o cérebro: cabeçalho compacto (modo embutido); `logo-64`, `logo-32`, `favicon.ico` e `apple-touch-icon.png` (sobre `#0f142a`).
+  - `logo-psicothica-cerebro.png` — **cérebro solo**: `logo-cerebro-512` e `logo-cerebro-256`. **Uso livre (carregamento, marca d'água); não usar como ícone.**
 - **Neon duplo:** magenta e ciano juntos, mais um halo suave dos dois. Tokens `--psi-neon-sm`, `--psi-neon`, `--psi-neon-lg` (caixas) e `--psi-neon-text-sm/-text/-text-lg` (texto). Com movimento reduzido nada anima, o brilho estático permanece.
 
 ## Aplicar num app de HTML único
@@ -94,7 +97,7 @@ O app é publicado como arquivos estáticos (GitHub Pages), então pode ter uma 
 
 ## Modo embutido (iframe)
 
-Os apps aparecem dentro de um iframe no AyAClin, que já mostra o nome do app numa faixa acima. Quando `window.self !== window.top`, o cabeçalho fica compacto: recorte do círculo da logo + selo, uma linha, e o nome do app só para leitores de tela. Fora do iframe, ele é completo, com a logo inteira.
+Os apps aparecem dentro de um iframe no AyAClin, que já mostra o nome do app numa faixa acima. Quando `window.self !== window.top`, o cabeçalho fica compacto: círculo da logo + selo, uma linha, e o nome do app só para leitores de tela. Fora do iframe, ele é completo, com a logo inteira.
 
 - **HTML**: um script curto marca `<html class="psi-embedded">` antes de o cabeçalho ser desenhado (por isso o bloco vai no topo do `<body>`).
 - **React**: a detecção é feita no estado inicial do componente, antes da primeira renderização. Em apps com renderização no servidor, passe `embedded` explicitamente.

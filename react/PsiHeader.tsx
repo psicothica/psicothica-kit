@@ -26,7 +26,7 @@ function detectEmbedded(): boolean {
 
 /**
  * Cabeçalho Psicothica: logo + nome do app + selo. Dentro de um iframe (AyAClin) fica compacto: uma
- * linha, recorte do círculo da logo e selo. Fora, mostra a logo completa e o nome do app. A detecção
+ * linha, círculo oficial da logo e selo. Fora, mostra a logo completa e o nome do app. A detecção
  * é feita no estado inicial (síncrona), então não há "pisca".
  * Pensado para apps só de cliente (Vite SPA). Com SSR, o servidor renderiza o modo completo e o
  * cliente pode divergir: nesse caso passe `embedded` explicitamente.
@@ -41,7 +41,7 @@ export function PsiHeader({ appName, assetsBase = "./psi-kit/", embedded, classN
   }, [compact]);
 
   const base = assetsBase.endsWith("/") ? assetsBase : assetsBase + "/";
-  // Completa fora do iframe (44px); recorte do círculo no modo embutido (28px).
+  // Completa fora do iframe (44px); círculo oficial no modo embutido (28px).
   const [name1x, name2x, size] = compact ? ["logo-32", "logo-64", 28] : ["logo-128", "logo-256", 44];
   return (
     <header className={`psi-header${compact ? " psi-header--compact" : ""} ${className}`.trim()} role="banner">

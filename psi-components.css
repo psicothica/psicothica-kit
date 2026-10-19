@@ -108,7 +108,7 @@
 }
 .psi-header__logo { display: block; flex: none; line-height: 0; }
 .psi-header__logo img { display: block; width: 44px; height: 44px; object-fit: contain; }
-/* A logo completa aparece fora do iframe; o recorte do círculo, no modo embutido. */
+/* A logo completa aparece fora do iframe; o círculo oficial, no modo embutido. */
 .psi-header__logo--crop { display: none; }
 .psi-header__app {
   flex: 1 1 auto; min-width: 0; margin: 0;
