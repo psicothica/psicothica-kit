@@ -1,0 +1,164 @@
+<!--HEAD-->
+<style>
+  /* Estilos só da página de demonstração (prefixo .demo-). O kit em si está em tokens.css e psi-components.css. */
+  .demo-wrap { max-width: var(--psi-container); margin: 0 auto; padding: var(--psi-space-5) var(--psi-space-4) 0; }
+  .demo-wrap section { margin-bottom: var(--psi-space-7); }
+  .demo-h2 { font-family: var(--psi-font-display); font-weight: 400; font-size: var(--psi-text-2xl); letter-spacing: 0.04em; line-height: 1; margin: 0 0 var(--psi-space-2); }
+  .demo-lead { color: var(--psi-text-muted); margin: 0 0 var(--psi-space-4); max-width: 62ch; }
+  .demo-hero { font-family: var(--psi-font-display); font-size: var(--psi-text-3xl); line-height: 0.95; letter-spacing: 0.03em; margin: var(--psi-space-6) 0 var(--psi-space-3); }
+  .demo-hero em { font-style: normal; background: var(--psi-grad-4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .demo-grid { display: grid; gap: var(--psi-space-4); grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .demo-grid--wide { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .demo-sw { border-radius: var(--psi-radius-md); overflow: hidden; border: 1px solid var(--psi-glass-border); }
+  .demo-sw div { height: 72px; }
+  .demo-sw p { margin: 0; padding: var(--psi-space-2) var(--psi-space-3); font-family: var(--psi-font-mono); font-size: 0.75rem; background: var(--psi-glass-bg); }
+  .demo-sw b { display: block; font-family: var(--psi-font-text); font-size: var(--psi-text-xs); color: var(--psi-text); }
+  .demo-sw small { color: var(--psi-text-muted); }
+  .demo-gr div { height: 96px; }
+  .demo-fonte { padding: var(--psi-space-4) var(--psi-space-5); }
+  .demo-fonte small { display: block; font-family: var(--psi-font-mono); font-size: 0.75rem; color: var(--psi-text-muted); margin-bottom: var(--psi-space-1); }
+  .demo-row { display: flex; flex-wrap: wrap; gap: var(--psi-space-3); align-items: center; }
+  .demo-frame { width: 100%; height: 220px; border: 1px solid var(--psi-glass-border); border-radius: var(--psi-radius-md); background: var(--psi-base); }
+  .demo-papel { background: var(--psi-paper); color: var(--psi-ink); border-radius: var(--psi-radius-md); padding: var(--psi-space-4) var(--psi-space-5); }
+  .demo-papel .v { color: var(--psi-violet); font-weight: 700; }
+  .demo-papel .i { color: var(--psi-indigo); font-weight: 700; }
+  .demo-textarea { width: 100%; min-height: 84px; padding: var(--psi-space-3); border-radius: var(--psi-radius-sm); border: 1px solid var(--psi-glass-border); background: rgba(15, 20, 42, 0.6); color: var(--psi-text); font: inherit; }
+  .demo-textarea:focus-visible { outline: none; box-shadow: var(--psi-focus-ring); }
+  .demo-out { margin: var(--psi-space-3) 0 0; padding: var(--psi-space-3); border-radius: var(--psi-radius-sm); background: rgba(0, 0, 0, 0.3); font-family: var(--psi-font-mono); font-size: 0.8125rem; color: var(--psi-sky); white-space: pre-wrap; min-height: 2.5em; }
+  .demo-out.erro { color: #ffb4b4; }
+  .demo-tag { display: inline-block; font-family: var(--psi-font-mono); font-size: 0.75rem; padding: 2px 8px; border-radius: var(--psi-radius-pill); border: 1px solid var(--psi-glass-border); color: var(--psi-text-muted); }
+  .demo-hand { font-family: var(--psi-font-hand); font-size: 2rem; line-height: 1; color: var(--psi-lavender); }
+  .demo-sign { font-family: var(--psi-font-signature); font-size: 2.6rem; line-height: 1.1; color: var(--psi-sky); }
+</style>
+</head>
+<body class="psi-theme">
+<!--HEADER-->
+<main class="demo-wrap">
+  <h1 class="demo-hero">psicothica-kit <em>1.0.0</em></h1>
+  <p class="demo-lead">Kit visual dos apps Psicothica: tokens, fontes locais, cabeçalho, rodapé e armazenamento por app. Esta página usa os mesmos blocos que os apps copiam. Nenhuma requisição a domínio externo.</p>
+
+  <section aria-labelledby="s-cab">
+    <h2 class="demo-h2" id="s-cab">Cabeçalho</h2>
+    <p class="demo-lead">Acima, o cabeçalho completo (página aberta direto). Abaixo, o <strong>modo embutido</strong>: a mesma página dentro de um iframe, como no AyAClin. Ele muda sozinho, antes da primeira pintura.</p>
+    <iframe class="demo-frame" src="embed.html" title="Exemplo do cabeçalho em modo embutido" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+  </section>
+
+  <section aria-labelledby="s-pal">
+    <h2 class="demo-h2" id="s-pal">Paleta</h2>
+    <p class="demo-lead">Base escura <code>#0f142a</code>, destaque claro <code>#e1eefc</code>. Ao lado de cada cor, o que é permitido para texto (WCAG; detalhes em docs/contraste.md).</p>
+    <div class="demo-grid">
+      <div class="demo-sw"><div style="background:var(--psi-base)"></div><p><b>base</b>#0f142a<br><small>fundo</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-frost)"></div><p><b>destaque</b>#e1eefc<br><small>texto: AAA</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-indigo)"></div><p><b>índigo</b>#130169<br><small>só fundo/borda</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-orchid)"></div><p><b>orquídea</b>#ce57df<br><small>texto: só na base; grande nos demais</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-violet)"></div><p><b>magenta-violeta</b>#b104dc<br><small>só fundo/brilho</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-cyan)"></div><p><b>ciano</b>#02bbff<br><small>texto: AA</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-sky)"></div><p><b>céu</b>#82e5ff<br><small>texto: AAA</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-lavender)"></div><p><b>lavanda</b>#ec9eff<br><small>texto: AA+</small></p></div>
+    </div>
+    <p class="demo-lead" style="margin-top:var(--psi-space-4)">Respiro claro: papel e cinzas. Sobre fundo claro o violeta passa AA e o índigo passa AAA:</p>
+    <div class="demo-papel"><span class="v">Magenta-violeta sobre papel</span> · <span class="i">Índigo sobre papel</span> · texto em tinta <code>#0f142a</code></div>
+  </section>
+
+  <section aria-labelledby="s-grad">
+    <h2 class="demo-h2" id="s-grad">Gradientes</h2>
+    <div class="demo-grid demo-gr">
+      <div class="demo-sw"><div style="background:var(--psi-grad-1)"></div><p>--psi-grad-1<br><small>#422774 → #5c8fe3</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-grad-2)"></div><p>--psi-grad-2<br><small>#980ded → #02295b</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-grad-3)"></div><p>--psi-grad-3<br><small>#6b05b2 → #0e0080</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-grad-4)"></div><p>--psi-grad-4<br><small>#d738d2 → #68a1ed</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-grad-5)"></div><p>--psi-grad-5<br><small>#01366d → #050040</small></p></div>
+      <div class="demo-sw"><div style="background:var(--psi-grad-6)"></div><p>--psi-grad-6<br><small>#04223d → #0f142a (fundo)</small></p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-tip">
+    <h2 class="demo-h2" id="s-tip">Tipografia</h2>
+    <p class="demo-lead">Seis fontes OFL, servidas de fonts/ (WOFF2, latin + latin-ext). Acentuação: ação, coração, órfã, ÀÉÎÕÜ.</p>
+    <div class="demo-grid demo-grid--wide">
+      <div class="psi-glass demo-fonte"><small>Bebas Neue · display de impacto</small><div style="font-family:var(--psi-font-display);font-size:2.4rem;line-height:1;letter-spacing:.04em">Decidir com calma</div></div>
+      <div class="psi-glass demo-fonte"><small>Shrikhand · acento</small><div style="font-family:var(--psi-font-accent);font-size:1.7rem;color:var(--psi-lavender)">Psicothica</div></div>
+      <div class="psi-glass demo-fonte"><small>Amatic SC · manuscrito</small><div class="demo-hand">um passo de cada vez</div></div>
+      <div class="psi-glass demo-fonte"><small>Great Vibes · assinatura</small><div class="demo-sign">Alanne Farias</div></div>
+      <div class="psi-glass demo-fonte"><small>JetBrains Mono · sistema/dados</small><div style="font-family:var(--psi-font-mono)">psi.balanca-da-decisao.v1.decisoes</div></div>
+      <div class="psi-glass demo-fonte"><small>Plus Jakarta Sans · texto corrido</small><div>Texto corrido para leitura confortável, com boa legibilidade em telas pequenas.</div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-glass">
+    <h2 class="demo-h2" id="s-glass">Cartões glass e botões</h2>
+    <div class="demo-grid demo-grid--wide" style="margin-bottom:var(--psi-space-4)">
+      <article class="psi-glass psi-card"><h3 class="psi-card__title">Cartão de vidro</h3><p class="psi-card__text">Camada translúcida com desfoque, borda clara e sombra suave.</p></article>
+      <article class="psi-glass psi-glass--strong psi-card"><h3 class="psi-card__title">Vidro forte</h3><p class="psi-card__text">Mais opaco, para destacar uma área dentro de outra.</p></article>
+      <article class="psi-glass psi-glass--glow psi-card"><h3 class="psi-card__title">Com brilho neon</h3><p class="psi-card__text">Brilho magenta estático. Só o selo pulsa, e não pulsa com movimento reduzido.</p></article>
+    </div>
+    <div class="demo-row">
+      <button class="psi-btn psi-btn--primary" type="button">Botão principal</button>
+      <button class="psi-btn psi-btn--ghost" type="button">Botão secundário</button>
+      <button class="psi-btn psi-btn--ghost" type="button" disabled>Desativado</button>
+      <span class="psi-seal">Psicothica</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-sto">
+    <h2 class="demo-h2" id="s-sto">Armazenamento por app (psi-storage)</h2>
+    <p class="demo-lead">Prefixo <code>psi.&lt;slug&gt;.v1.</code>. O arquivo exportado leva só as chaves deste app; importar valida o app antes de gravar. Teste:</p>
+    <div class="psi-glass psi-card">
+      <label for="demo-nota" class="demo-lead" style="display:block;margin-bottom:var(--psi-space-2)">Anotação de exemplo (fica só neste navegador):</label>
+      <textarea id="demo-nota" class="demo-textarea" placeholder="Escreva algo e clique em Salvar"></textarea>
+      <div class="demo-row" style="margin-top:var(--psi-space-3)">
+        <button class="psi-btn psi-btn--primary" type="button" id="b-salvar">Salvar</button>
+        <button class="psi-btn psi-btn--ghost" type="button" id="b-exportar">Exportar .json</button>
+        <label class="psi-btn psi-btn--ghost" for="b-importar" style="cursor:pointer">Importar .json</label>
+        <input type="file" id="b-importar" accept="application/json" class="psi-sr-only">
+        <button class="psi-btn psi-btn--ghost" type="button" id="b-outro">Importar arquivo de OUTRO app</button>
+        <button class="psi-btn psi-btn--ghost" type="button" id="b-legado">Simular chave antiga + migrar</button>
+        <button class="psi-btn psi-btn--ghost" type="button" id="b-limpar">Apagar as chaves deste app</button>
+      </div>
+      <p class="demo-out" id="demo-saida" role="status" aria-live="polite">Pronto.</p>
+      <p class="demo-lead" style="margin:var(--psi-space-3) 0 0">Chaves deste app: <span class="demo-tag" id="demo-chaves">…</span> · gravação persistente: <span class="demo-tag" id="demo-persist">…</span></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="s-rod">
+    <h2 class="demo-h2" id="s-rod">Rodapé</h2>
+    <p class="demo-lead">Sem aviso médico (apps de saúde mental) e com aviso médico (apps com conteúdo de saúde física).</p>
+  </section>
+</main>
+<!--FOOTER-SEM-->
+<!--FOOTER-COM-->
+<script src="../js/psi-storage.js"></script>
+<script>
+  (function () {
+    var store = PsiStorage.create({ slug: "kit-demo", appName: "Demo do kit", version: "1.0.0" });
+    var $ = function (id) { return document.getElementById(id); };
+    var out = $("demo-saida");
+    function say(msg, erro) { out.textContent = msg; out.className = "demo-out" + (erro ? " erro" : ""); refresh(); }
+    function refresh() {
+      $("demo-chaves").textContent = store.keys().join(", ") || "(nenhuma)";
+      $("demo-persist").textContent = store.persistent ? "sim" : "NÃO (memória)";
+    }
+    $("demo-nota").value = store.get("nota", "");
+    $("b-salvar").addEventListener("click", function () { store.set("nota", $("demo-nota").value); say("Salvo em " + store.prefix + "nota"); });
+    $("b-exportar").addEventListener("click", function () { var n = store.download(); say("Arquivo gerado: " + n + "\n(só chaves de " + store.prefix + ")"); });
+    $("b-importar").addEventListener("change", function (e) {
+      var f = e.target.files[0]; if (!f) return;
+      store.importFile(f).then(function (n) { $("demo-nota").value = store.get("nota", ""); say(n + " chave(s) importada(s)."); },
+                               function (err) { say(err.message, true); });
+      e.target.value = "";
+    });
+    $("b-outro").addEventListener("click", function () {
+      try { store.importJSON({ kit: "psicothica-kit", schema: 1, app: "outro-app", appName: "Outro App", data: { nota: "intrusa" } }); say("Importou (não deveria!)", true); }
+      catch (err) { say("Recusado, como esperado: " + err.message, true); }
+    });
+    $("b-legado").addEventListener("click", function () {
+      try { localStorage.setItem("nota_antiga", JSON.stringify("veio de uma chave antiga")); } catch (e) {}
+      var n = store.migrate([{ from: "nota_antiga", to: "nota_migrada" }]);
+      say(n ? "Migrou " + n + " chave. Valor: " + store.get("nota_migrada") : "Migração já feita neste navegador (ela roda uma vez só).");
+    });
+    $("b-limpar").addEventListener("click", function () { store.keys().forEach(function (k) { store.remove(k); }); $("demo-nota").value = ""; say("Chaves apagadas."); });
+    refresh();
+  })();
+</script>
+</body>
+</html>

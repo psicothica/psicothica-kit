@@ -1,0 +1,28 @@
+<!-- psicothica-kit 1.0.0 · cabeçalho (cole logo depois de <body>, antes de qualquer conteúdo)
+
+     No <head> da página, uma vez:
+       <link rel="stylesheet" href="psi-kit/tokens.css">
+       <link rel="stylesheet" href="psi-kit/psi-components.css">
+     e no <body>: class="psi-theme" (fundo e texto da marca).
+     Troque "Nome do app" abaixo. Os arquivos do kit ficam na pasta psi-kit/ do app.
+
+     MODO EMBUTIDO: o script abaixo marca <html class="psi-embedded"> quando a página roda dentro de
+     um iframe. Ele roda ANTES do cabeçalho ser desenhado (por isso este bloco precisa ficar no topo
+     do <body>): não há "pisca" na troca. Dentro do iframe o cabeçalho vira uma linha (logo pequena +
+     selo); fora, aparece completo. -->
+<script>
+  (function () {
+    try { if (window.self !== window.top) document.documentElement.classList.add("psi-embedded"); }
+    catch (e) { document.documentElement.classList.add("psi-embedded"); }
+  })();
+</script>
+<header class="psi-header" role="banner">
+  <div class="psi-header__inner">
+    <picture class="psi-header__logo">
+      <source type="image/webp" srcset="psi-kit/logo/logo-64.webp 1x, psi-kit/logo/logo-128.webp 2x">
+      <img src="psi-kit/logo/logo-64.png" srcset="psi-kit/logo/logo-64.png 1x, psi-kit/logo/logo-128.png 2x" width="44" height="44" alt="" decoding="async">
+    </picture>
+    <p class="psi-header__app">Nome do app</p>
+    <span class="psi-seal">Psicothica</span>
+  </div>
+</header>

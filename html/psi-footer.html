@@ -1,0 +1,33 @@
+<!-- psicothica-kit 1.0.0 · rodapé (cole no fim do <body>, depois do conteúdo do app)
+
+     Preencha os atributos de <footer>:
+       data-psi-app       nome do app
+       data-psi-versao    versão do app (ex.: 1.0.0)
+       data-psi-revisao   mês/ano da última revisão (ex.: 10/2026)
+       data-psi-aviso-medico   (atributo sem valor) — presente = mostra o bloco "aviso médico";
+                               apague o atributo nos apps sem conteúdo de saúde física.
+     Os textos fixos NÃO devem ser editados no app: mudaram? Mude no kit e publique nova versão. -->
+<footer class="psi-footer" role="contentinfo" data-psi-app="Nome do app" data-psi-versao="1.0.0" data-psi-revisao="10/2026">
+  <div class="psi-footer__inner">
+    <p class="psi-footer__app" data-psi-slot="app"></p>
+    <p class="psi-footer__assinatura"><strong>Psicothica</strong> · por Alanne Raquel Fragoso de Farias, psicóloga (CRP 13/9646)<br>Disponível no Programa Ramificar da AyA Clínica Integrada.</p>
+    <p>Material informativo e de apoio. Não substitui avaliação, diagnóstico ou acompanhamento profissional, e não oferece promessa de cura ou de resultado.</p>
+    <p class="psi-footer__medico" data-psi-slot="aviso-medico" hidden>As informações sobre diagnóstico e tratamento médico têm caráter apenas informativo e se baseiam em literatura científica publicada. Decisões sobre medicação ou tratamento devem ser tomadas com seu(sua) médico(a).</p>
+    <p>Conteúdo e interface elaborados com auxílio de ferramentas de inteligência artificial e revisados pela profissional responsável.</p>
+    <p>Seus dados ficam só neste aparelho. Nada do que você escreve é enviado à AyA nem a terceiros. Se você exportar um arquivo, ele levará o que você escreveu: guarde-o com cuidado.</p>
+    <p class="psi-footer__crise">Em sofrimento intenso ou risco? <a href="tel:188" target="_blank" rel="noopener noreferrer">CVV 188</a> (gratuito, 24h) · <a href="tel:192" target="_blank" rel="noopener noreferrer">SAMU 192</a> · ou a emergência mais próxima.</p>
+    <p class="psi-footer__versao">Versão <span data-psi-slot="versao">—</span> · revisado em <span data-psi-slot="revisao">—</span></p>
+  </div>
+</footer>
+<script>
+  (function () {
+    var f = document.currentScript && document.currentScript.previousElementSibling;
+    if (!f || !f.classList.contains("psi-footer")) return;
+    function put(slot, text) { var el = f.querySelector('[data-psi-slot="' + slot + '"]'); if (el) el.textContent = text || ""; }
+    put("app", f.getAttribute("data-psi-app"));
+    put("versao", f.getAttribute("data-psi-versao"));
+    put("revisao", f.getAttribute("data-psi-revisao"));
+    var med = f.querySelector('[data-psi-slot="aviso-medico"]');
+    if (med && f.hasAttribute("data-psi-aviso-medico")) med.hidden = false;
+  })();
+</script>

@@ -1,0 +1,179 @@
+/*!
+ * psicothica-kit 1.0.0 — psi-components.css
+ * Cabeçalho, rodapé, vidro, cartão, botão, selo e aviso de armazenamento.
+ * Tudo escopado com o prefixo .psi- (não vaza para o CSS do app). Requer tokens.css.
+ * Sem requisição externa. Brilho animado só com prefers-reduced-motion: no-preference.
+ */
+
+/* ── Tema (opcional): aplique a classe no <body> para o fundo e o texto padrão da marca ── */
+.psi-theme {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--psi-base) var(--psi-grad-fundo) fixed;
+  color: var(--psi-text);
+  font-family: var(--psi-font-text);
+  font-size: var(--psi-text-md);
+  line-height: var(--psi-leading);
+  -webkit-font-smoothing: antialiased;
+}
+
+.psi-sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ── Vidro ─────────────────────────────────────────────────────────────── */
+.psi-glass {
+  background: var(--psi-glass-bg);
+  border: 1px solid var(--psi-glass-border);
+  border-radius: var(--psi-radius-md);
+  box-shadow: var(--psi-glass-shadow);
+  -webkit-backdrop-filter: blur(var(--psi-glass-blur)) saturate(130%);
+  backdrop-filter: blur(var(--psi-glass-blur)) saturate(130%);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .psi-glass { background: rgba(26, 33, 62, 0.92); }
+}
+.psi-glass--strong { background: var(--psi-glass-bg-strong); }
+.psi-glass--glow { box-shadow: var(--psi-glass-shadow), var(--psi-glow-magenta); }
+
+.psi-card {
+  padding: var(--psi-space-5);
+  border-radius: var(--psi-radius-md);
+}
+.psi-card__title {
+  margin: 0 0 var(--psi-space-2);
+  font-family: var(--psi-font-display);
+  font-weight: 400;
+  font-size: var(--psi-text-xl);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+.psi-card__text { margin: 0; color: var(--psi-text-muted); font-size: var(--psi-text-sm); }
+
+/* ── Botões ────────────────────────────────────────────────────────────── */
+.psi-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--psi-space-2);
+  min-height: 44px; padding: 0.6rem 1.25rem;
+  border: 1px solid transparent; border-radius: var(--psi-radius-pill);
+  font-family: var(--psi-font-text); font-weight: 700; font-size: var(--psi-text-sm);
+  line-height: 1.2; text-decoration: none; cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.psi-btn:active { transform: translateY(1px); }
+.psi-btn:focus-visible, .psi-seal:focus-visible, .psi-footer a:focus-visible { outline: none; box-shadow: var(--psi-focus-ring); }
+/* texto escuro sobre o gradiente rosa→azul: contraste mínimo 4,67:1 (AA) */
+.psi-btn--primary { background: var(--psi-grad-4); color: var(--psi-ink); box-shadow: var(--psi-glow-magenta); }
+.psi-btn--primary:hover { box-shadow: var(--psi-glow-magenta), 0 0 0 2px rgba(225, 238, 252, 0.35); }
+.psi-btn--ghost {
+  background: var(--psi-glass-bg); color: var(--psi-text); border-color: var(--psi-glass-border);
+}
+.psi-btn--ghost:hover { background: var(--psi-glass-bg-strong); }
+.psi-btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+/* ── Selo "Psicothica" ─────────────────────────────────────────────────── */
+.psi-seal {
+  display: inline-flex; align-items: center;
+  padding: 0.25rem 0.9rem;
+  border: 1px solid rgba(236, 158, 255, 0.55);
+  border-radius: var(--psi-radius-pill);
+  background: rgba(177, 4, 220, 0.18);
+  color: var(--psi-lavender);
+  font-family: var(--psi-font-accent); font-size: 1rem; line-height: 1.2; letter-spacing: 0.02em;
+  box-shadow: var(--psi-glow-magenta);
+  text-decoration: none; white-space: nowrap;
+}
+
+/* ── Cabeçalho ─────────────────────────────────────────────────────────── */
+.psi-header {
+  box-sizing: border-box; width: 100%;
+  background: rgba(15, 20, 42, 0.78);
+  border-bottom: 1px solid var(--psi-glass-border);
+  -webkit-backdrop-filter: blur(var(--psi-glass-blur));
+  backdrop-filter: blur(var(--psi-glass-blur));
+  color: var(--psi-text);
+  font-family: var(--psi-font-text);
+}
+.psi-header *, .psi-header *::before, .psi-header *::after { box-sizing: border-box; }
+.psi-header__inner {
+  display: flex; align-items: center; gap: var(--psi-space-3);
+  max-width: var(--psi-container); margin: 0 auto;
+  padding: var(--psi-space-3) var(--psi-space-4);
+}
+.psi-header__logo { display: block; flex: none; line-height: 0; }
+.psi-header__logo img { display: block; width: 44px; height: 44px; object-fit: contain; }
+.psi-header__app {
+  flex: 1 1 auto; min-width: 0; margin: 0;
+  font-family: var(--psi-font-display); font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 2.25rem); letter-spacing: 0.04em; line-height: 1;
+  overflow-wrap: anywhere;
+}
+.psi-header .psi-seal { margin-left: auto; }
+
+/* Modo embutido (dentro de iframe): uma linha, logo pequena + selo. O nome do app já aparece na
+   faixa do AyAClin; aqui ele fica só para leitores de tela. A classe vem do <html> (script inline,
+   antes da primeira pintura) ou do modificador --compact (React). */
+html.psi-embedded .psi-header__inner, .psi-header--compact .psi-header__inner {
+  padding: var(--psi-space-1) var(--psi-space-3); gap: var(--psi-space-2); flex-wrap: nowrap;
+}
+html.psi-embedded .psi-header__logo img, .psi-header--compact .psi-header__logo img { width: 24px; height: 24px; }
+html.psi-embedded .psi-header__app, .psi-header--compact .psi-header__app {
+  position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+html.psi-embedded .psi-header .psi-seal, .psi-header--compact .psi-seal {
+  padding: 0.1rem 0.65rem; font-size: 0.8125rem; box-shadow: none;
+}
+
+@media (max-width: 420px) {
+  .psi-header__inner { gap: var(--psi-space-2); }
+  .psi-header__logo img { width: 36px; height: 36px; }
+  .psi-header .psi-seal { font-size: 0.875rem; padding: 0.2rem 0.7rem; }
+}
+
+/* ── Rodapé ────────────────────────────────────────────────────────────── */
+.psi-footer {
+  box-sizing: border-box; width: 100%; margin-top: var(--psi-space-7);
+  border-top: 1px solid var(--psi-glass-border);
+  background: rgba(15, 20, 42, 0.78);
+  color: var(--psi-text-muted);
+  font-family: var(--psi-font-text); font-size: var(--psi-text-xs); line-height: 1.6;
+}
+.psi-footer *, .psi-footer *::before, .psi-footer *::after { box-sizing: border-box; }
+.psi-footer__inner {
+  max-width: var(--psi-container); margin: 0 auto;
+  padding: var(--psi-space-5) var(--psi-space-4) var(--psi-space-6);
+}
+.psi-footer p { margin: 0 0 var(--psi-space-3); }
+.psi-footer__app { font-family: var(--psi-font-display); font-size: 1.25rem; letter-spacing: 0.05em; color: var(--psi-text); }
+.psi-footer__assinatura strong { color: var(--psi-text); font-weight: 700; }
+.psi-footer__medico {
+  padding: var(--psi-space-3) var(--psi-space-4);
+  border: 1px solid var(--psi-glass-border); border-left: 3px solid var(--psi-cyan);
+  border-radius: var(--psi-radius-sm); background: var(--psi-glass-bg); color: var(--psi-text);
+}
+.psi-footer__medico[hidden] { display: none; }
+.psi-footer__crise { color: var(--psi-text); }
+.psi-footer a { color: var(--psi-link); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; border-radius: 3px; }
+.psi-footer__versao { margin-bottom: 0 !important; font-family: var(--psi-font-mono); font-size: 0.75rem; }
+
+/* ── Aviso de armazenamento (psi-storage.js) ───────────────────────────── */
+.psi-warning {
+  box-sizing: border-box; margin: 0; padding: var(--psi-space-3) var(--psi-space-4);
+  background: #3a1d00; color: #ffe2b8; border-bottom: 2px solid #ffb04a;
+  font-family: var(--psi-font-text); font-size: var(--psi-text-sm); line-height: 1.4; text-align: center;
+}
+
+/* ── Brilho animado: só se a pessoa NÃO pediu redução de movimento ─────── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes psi-pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(206, 87, 223, 0.45), 0 0 20px rgba(177, 4, 220, 0.25); }
+    50% { box-shadow: 0 0 14px rgba(206, 87, 223, 0.75), 0 0 36px rgba(177, 4, 220, 0.5); }
+  }
+  .psi-seal { animation: psi-pulse 4.5s ease-in-out infinite; }
+  html.psi-embedded .psi-header .psi-seal, .psi-header--compact .psi-seal { animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .psi-btn { transition: none; }
+}
